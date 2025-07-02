@@ -1,26 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=League+Spartan:wght@100..900&family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-desaturated-dark-cyan: hsl(180, 29%, 50%);
+  --color-light-grayish-cyan-bg: hsl(180, 52%, 96%);
+  --color-light-grayish-cyan-filter: hsl(180, 31%, 95%);
+  --color-dark-grayish-cyan: hsl(180, 8%, 52%);
+  --color-very-dark-grayish-cyan: hsl(180, 14%, 20%);
+  --font-league-spartan: "League Spartan", sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: hsl(180, 52%, 96%);
 }
+
+/* * {
+	outline: 1px dashed red !important;
+}
+ */

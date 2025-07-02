@@ -2,6 +2,6 @@ import JobList from '../components/JobList.jsx'
 
 export default function Home() {
   return (
-    <JobList></JobList>
+    <JobList className="font-league-spartan"></JobList>
   );
 }

@@ -21,8 +21,7 @@ function JobList() {
     console.log(jobArray)
 
   return (
-    <div>
-        <h1>Job Listings</h1>
+    <div className="job-list grid place-content-center gap-4 mt-6">
         {jobArray && jobArray.map(job => 
             <Job key={job.id} {...job} />
         )}
