@@ -8,11 +8,17 @@ function JobHeader({ company, new: isNew, featured, position, postedAt, contract
             {isNew && <span className="mr-2 rounded-2xl p-1 px-2 text-sm text-white bg-desaturated-dark-cyan font-extrabold">NEW!</span>}
             {featured && <span className="rounded-2xl p-1 px-2 text-sm text-white bg-black font-extrabold">FEATURED</span>}
         </div>
-        <h2 className="company-position text-black font-bold">{position}</h2>
-        <div className="company-meta-info flex flex-start flex-nowrap gap-x-0.5 text-dark-grayish-cyan">
-            <span className="mr-4 font-bold">{postedAt}</span>
-            <span className="mx-4 font-bold">{contract}</span>
-            <span className="ml-4 font-bold">{location}</span>
+        <h2 className="company-position text-black font-extrabold">{position}</h2>
+        <div className="company-meta-info flex flex-nowrap items-center gap-x-1.5 font-semibold text-dark-grayish-cyan">
+            <span className="whitespace-nowrap">{postedAt}</span>
+            
+            <span className="text-dark-grayish-cyan"> • </span> 
+            
+            <span className="whitespace-nowrap">{contract}</span>
+            
+            <span className="text-dark-grayish-cyan"> • </span>
+            
+            <span className="whitespace-nowrap">{location}</span>
         </div>
     </div>
   )
