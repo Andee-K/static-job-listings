@@ -23,45 +23,51 @@ function JobList() {
       })
       .then((fetchedData) => {
         defaultJob.current = fetchedData;
-        
+
         // Retrieving all unique tags
-        const allTags = fetchedData.flatMap((job) => [...job.languages, ...job.tools]);
+        const allTags = fetchedData.flatMap((job) => [
+            job.role,
+            job.level,
+          ...job.languages,
+          ...job.tools,
+        ]);
         const uniqueTags = new Set(allTags);
         console.log(uniqueTags);
         setAvailableFilters([...uniqueTags]);
-        setDisplayJobs(fetchedData)}
-    )
+        setDisplayJobs(fetchedData);
+      })
       .catch((error) => console.error(`ERROR FETCHING JSON: ${error}`));
   }, []);
 
   // Reload jobs every filter change
   useEffect(() => {
     if (selectFilters.size === 0) {
-        setDisplayJobs(defaultJob.current);
+      setDisplayJobs(defaultJob.current);
+    } else {
+      const filterJobs = defaultJob.current.filter((job) => {
+        const jobTags = new Set([job.role, job.level, ...job.languages, ...job.tools]);
+        return Array.from(selectFilters).every((selectedTag) =>
+          jobTags.has(selectedTag)
+        );
+      });
+      setDisplayJobs(filterJobs);
     }
-    else {
-        const filterJobs = defaultJob.current.filter((job) => {
-            const jobTags = new Set([...job.languages, ...job.tools]);
-            return Array.from(selectFilters).every(selectedTag => jobTags.has(selectedTag));
-        })
-        setDisplayJobs(filterJobs);
-    }
-  }, [selectFilters])
+  }, [selectFilters]);
 
   function handleFilterClick(filterValue, actionIsAdd) {
     setSelectFilters((prevFilter) => {
-        const newSet = new Set(prevFilter);
+      const newSet = new Set(prevFilter);
 
-        // User checks a filter
-        if (actionIsAdd) {
-            newSet.add(filterValue);
-        }
-        // User unchecks a filter
-        else {
-            newSet.delete(filterValue);
-        }
-        return newSet;
-    })
+      // User checks a filter
+      if (actionIsAdd) {
+        newSet.add(filterValue);
+      }
+      // User unchecks a filter
+      else {
+        newSet.delete(filterValue);
+      }
+      return newSet;
+    });
   }
 
   function handleClear() {
@@ -70,7 +76,12 @@ function JobList() {
 
   return (
     <div className="app-layout grid place-content-center m-6">
-      <Filter availableFilters={availableFilters} handleFilterClick={handleFilterClick} selectFilters={selectFilters} handleClear={handleClear}></Filter>
+      <Filter
+        availableFilters={availableFilters}
+        handleFilterClick={handleFilterClick}
+        selectFilters={selectFilters}
+        handleClear={handleClear}
+      ></Filter>
       <div className="job-list grid gap-10 mt-10">
         {displayJobs && displayJobs.map((job) => <Job key={job.id} {...job} />)}
       </div>

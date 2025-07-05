@@ -17,7 +17,7 @@ function Filter({
         <div className="filter-item-menu mt-2 flex flex-wrap">
           {availableFilters.map((tag) => (
             <div
-              className="mx-2 my-1 p-1 border-1 rounded-md border-desaturated-dark-cyan bg-white"
+              className="p-0.5 m-0.5 border-1 rounded-md border-desaturated-dark-cyan bg-white"
               key={tag}
             >
               <label className="font-bold mx-2" htmlFor={`filter-${tag}`}>
@@ -42,7 +42,7 @@ function Filter({
             <div key={filter} className="rounded-md m-2 flex bg-light-grayish-cyan-filter text-desaturated-dark-cyan font-bold">
               <p className="p-2 px-2.5">{filter}</p>
               <button
-                className="w-10 text-white rounded-r-md bg-desaturated-dark-cyan font-extrabold"
+                className="w-10 text-white rounded-r-md bg-desaturated-dark-cyan font-extrabold hover:bg-black"
                 onClick={() => handleFilterClick(filter, false)}
               >
                 X
@@ -52,7 +52,7 @@ function Filter({
         </div>
 
         <button
-          className="clear text-dark-grayish-cyan font-bold"
+          className="clear text-dark-grayish-cyan hover:text-desaturated-dark-cyan font-bold"
           onClick={handleClear}
         >
           Clear
