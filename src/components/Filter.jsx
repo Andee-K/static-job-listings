@@ -17,7 +17,7 @@ function Filter({
         <div className="filter-item-menu mt-2 flex flex-wrap">
           {availableFilters.map((tag) => (
             <div
-              className="p-0.5 m-0.5 border-1 rounded-md border-desaturated-dark-cyan bg-white"
+              className="p-1 px-2 m-0.5 border-1 rounded-md border-desaturated-dark-cyan bg-white"
               key={tag}
             >
               <label className="font-bold mx-2" htmlFor={`filter-${tag}`}>

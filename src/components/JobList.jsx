@@ -57,12 +57,11 @@ function JobList() {
   function handleFilterClick(filterValue, actionIsAdd) {
     setSelectFilters((prevFilter) => {
       const newSet = new Set(prevFilter);
-
       // User checks a filter
       if (actionIsAdd) {
         newSet.add(filterValue);
       }
-      // User unchecks a filter
+      // User unchecks a filter or presses X button on tag
       else {
         newSet.delete(filterValue);
       }
@@ -75,11 +74,12 @@ function JobList() {
   }
 
   return (
-    <div className="app-layout grid place-content-center m-6">
+    <div className="app-layout grid place-content-center lg:flex lg:justify-center lg:flex-col lg:p-8 m-6">
       <Filter
+        className=""
         availableFilters={availableFilters}
-        handleFilterClick={handleFilterClick}
         selectFilters={selectFilters}
+        handleFilterClick={handleFilterClick}
         handleClear={handleClear}
       ></Filter>
       <div className="job-list grid gap-10 mt-10">

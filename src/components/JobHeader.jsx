@@ -3,7 +3,7 @@ import React from 'react'
 function JobHeader({ company, new: isNew, featured, position, postedAt, contract, location }) {
   return (
     <div className="header flex flex-col gap-y-3">
-        <div className="company-name mt-2">
+        <div className="company-name mt-2 lg:m-0">
             <span className="mr-6 text-desaturated-dark-cyan font-extrabold">{company}</span>
             {isNew && <span className="mr-2 rounded-2xl p-1 px-2 text-sm text-white bg-desaturated-dark-cyan font-extrabold">NEW!</span>}
             {featured && <span className="rounded-2xl p-1 px-2 text-sm text-white bg-black font-extrabold">FEATURED</span>}
