@@ -12,6 +12,7 @@ function JobList() {
   const [availableFilters, setAvailableFilters] = useState([]);
   const defaultJob = useRef(null);
 
+  // Load data from "database"
   useEffect(() => {
     fetch("/data.json")
       .then((response) => {
@@ -33,25 +34,43 @@ function JobList() {
       .catch((error) => console.error(`ERROR FETCHING JSON: ${error}`));
   }, []);
 
-  function handleFilterClick(e) {
+  // Reload jobs every filter change
+  useEffect(() => {
+    if (selectFilters.size === 0) {
+        setDisplayJobs(defaultJob.current);
+    }
+    else {
+        const filterJobs = defaultJob.current.filter((job) => {
+            const jobTags = new Set([...job.languages, ...job.tools]);
+            return Array.from(selectFilters).every(selectedTag => jobTags.has(selectedTag));
+        })
+        setDisplayJobs(filterJobs);
+    }
+  }, [selectFilters])
+
+  function handleFilterClick(filterValue, actionIsAdd) {
     setSelectFilters((prevFilter) => {
         const newSet = new Set(prevFilter);
 
         // User checks a filter
-        if (e.target.checked) {
-            prevFilter.add(e.target.value);
+        if (actionIsAdd) {
+            newSet.add(filterValue);
         }
         // User unchecks a filter
         else {
-            prevFilter.delete(e.target.value);
+            newSet.delete(filterValue);
         }
         return newSet;
     })
   }
 
+  function handleClear() {
+    setSelectFilters(new Set());
+  }
+
   return (
     <div className="app-layout grid place-content-center m-6">
-      <Filter availableFilters={availableFilters} handleFilterClick={handleFilterClick} selectFilters={selectFilters}></Filter>
+      <Filter availableFilters={availableFilters} handleFilterClick={handleFilterClick} selectFilters={selectFilters} handleClear={handleClear}></Filter>
       <div className="job-list grid gap-10 mt-10">
         {displayJobs && displayJobs.map((job) => <Job key={job.id} {...job} />)}
       </div>
